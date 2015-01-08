@@ -1,4 +1,4 @@
-# jQuery-Embed-YouTube
+# jQuery.EmbedYouTube
 
 This jQuery plugin converts YouTube URLs to embedded videos.<br> 
 I found numerous plugins & code snippets, but none that "just worked".
