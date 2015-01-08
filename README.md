@@ -8,7 +8,7 @@ Parts of this code are heavily borrowed from <a href="https://raw.githubusercont
 <br>
 Usage:
 ```JavaScript
-$(target).embedYouTube();
+$(selector).embedYouTube();
 ```
 <br>
 License:&nbsp;&nbsp;Public Domain
