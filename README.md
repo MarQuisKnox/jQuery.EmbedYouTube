@@ -12,3 +12,6 @@ $(target).embedYouTube();
 ```
 <br>
 License:&nbsp;&nbsp;Public Domain
+<br>
+<br>
+Feel free to send Pull Requests for bug fixes & improvements.
