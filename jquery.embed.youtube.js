@@ -55,18 +55,28 @@
         return elContent;
     }
     
+    // @link	http://stackoverflow.com/a/3452617
+    // @link	http://stackoverflow.com/a/14904787
     function _getId( url ) {
-        var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-        var match = url.match(regExp);
-
-        if (match && match[2].length == 11) {
-            return match[2];
+        var videoId = url.split('v=')[1];
+        
+        if( videoId ) {
+            return videoId;
         } else {
-            return 'error';
+        	return _getIdByRegEx( url );
         }
-    } 
+    }
     
-    // thanks php.js
+    function _getIdByRegEx( url ) {
+        var regExp	= /^.*(youtube\.com|youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;        
+        var matches	= url.match( regExp );
+
+        if ( matches ) {
+            return matches[2];
+        }
+    }    
+    
+	// thanks php.js
     function _str_replace(search, replace, subject, count) {
     	  //  discuss at: http://phpjs.org/functions/str_replace/
     	  // original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
@@ -142,7 +152,10 @@
     	  }
     	  return sa ? s : s[0];
     }
+    
 
+    // Embed any YouTube URLs that are 
+    // not already embedded
     function _embedUrls( matches, $el, options ) {
     	
     	var newContent;
@@ -151,8 +164,8 @@
             var elContent	= $el.html();        	
     		var videoId		= _getId( value );
     		
-    		if( videoId.length > 0 ) {
-                var template	= '<iframe width="'+ options.width +'" height="'+ options.height +'" src="//www.youtube.com/embed/__VIDEO_ID__" frameborder="0" allowfullscreen></iframe>';
+    		if( videoId ) {
+                var template	= '<iframe width="'+ options.width +'" height="'+ options.height +'" src="//www.youtube-nocookie.com/embed/__VIDEO_ID__" frameborder="0" allowfullscreen></iframe>';
                 newContent		= _str_replace( '__VIDEO_ID__', videoId, template );                
         		elContent		= elContent.replace( this, newContent );    			
     		}
